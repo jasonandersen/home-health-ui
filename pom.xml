@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>janders.home.health.ui</groupId>
-	<artifactId>health-ui</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>janders.home</groupId>
+	<artifactId>health-uploader</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>health-ui</name>
-	<description>Demo project for Spring Boot</description>
+	<name>health-uploader</name>
+	<description>A user can upload export files from Runkeeper and Apple Health</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -23,6 +23,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<cucumber.version>1.2.5</cucumber.version>
+		<docker.image.prefix>home</docker.image.prefix>
+		<nexus.host>bricktop:8081</nexus.host>
 	</properties>
 
 	<dependencies>
@@ -61,6 +63,24 @@
 		</dependency>
 
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>maven-group</id>
+			<url>http://${nexus.host}/repository/maven-public/</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://${nexus.host}/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://${nexus.host}/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>
